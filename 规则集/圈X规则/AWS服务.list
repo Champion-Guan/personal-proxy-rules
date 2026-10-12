@@ -1,5 +1,5 @@
-# AWS console and cloud service domains. Keep these before Amazon shopping rules.
-# The generated Quantumult X config also applies this policy through force-policy.
+# AWS 控制台和云服务域名，优先于 Amazon 电商规则。
+# 生成的圈 X 配置也通过 force-policy 指定对应策略。
 HOST-SUFFIX,aws.amazon.com,☁️ AWS亚马逊服务器节点
 HOST-SUFFIX,amazonaws.com,☁️ AWS亚马逊服务器节点
 HOST-SUFFIX,amazonaws.com.cn,☁️ AWS亚马逊服务器节点

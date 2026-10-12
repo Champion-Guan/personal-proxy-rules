@@ -15,21 +15,19 @@
 │   └── 圈X规则/                 # 上述服务及苹果服务
 ├── 脚本/
 │   ├── 构建圈X配置.py
-│   ├── 构建圈X本地配置.sh
-│   └── 同步兼容文件.py
-├── .github/workflows/           # 内含检查上游规则.yml、更新圈X配置.yml
-└── rules/                       # 自动同步的旧规则网址兼容副本
+│   └── 构建圈X本地配置.sh
+└── .github/workflows/           # 内含检查上游规则.yml、更新圈X配置.yml
 ```
 
-配置、规则和脚本以中文目录内的文件为准。修改规则后执行 `python3 脚本/同步兼容文件.py`，更新旧规则网址兼容副本；不要直接编辑 `rules/`。GitHub 首页使用 `README.md`，客户端配置关键字、域名、上游网址、品牌名称与文件扩展名按原格式保留。
+配置、规则和脚本统一使用中文目录。直接维护“配置”和“规则集”中的文件即可。GitHub 首页使用 `README.md`，客户端配置关键字、域名、上游网址、品牌名称与文件扩展名按原格式保留。
 
 中文规则网址已进行百分号编码，确保客户端可以正常请求。重命名没有改变策略组、规则顺序或分流行为。
 
-## Quantumult X 自动配置
+## 圈 X 自动配置
 
 `配置/圈X自动配置.conf` 由 GitHub Actions 自动生成：以墨鱼官方配置为上游，采用官方通用设置、任务和重写；采用个人策略组；合并官方与个人分流并自动去重。
 
-Quantumult X 订阅地址：
+圈 X 订阅地址：
 
 `https://raw.githubusercontent.com/Champion-Guan/personal-proxy-rules/main/%E9%85%8D%E7%BD%AE/%E5%9C%88X%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE.conf`
 
@@ -59,7 +57,6 @@ GitHub Actions 的显示名称为“检查上游规则”和“更新圈X配置�
 
 ```bash
 python3 脚本/构建圈X配置.py 配置/圈X分流模板.conf 配置/圈X自动配置.conf
-python3 脚本/同步兼容文件.py
 ```
 
 可通过 `OFFICIAL_CONFIG_FILE` 指定本机上游配置文件进行离线构建校验。

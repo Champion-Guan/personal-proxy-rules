@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   update:
+    name: 生成并发布圈X配置
     runs-on: ubuntu-latest
     steps:
       - name: 检出仓库
@@ -18,7 +19,6 @@ jobs:
       - name: 构建并校验圈X配置
         run: |
           python3 '脚本/构建圈X配置.py' '配置/圈X分流模板.conf' '配置/圈X自动配置.conf'
-          python3 '脚本/同步兼容文件.py'
 
       - name: 提交生成配置
         run: |

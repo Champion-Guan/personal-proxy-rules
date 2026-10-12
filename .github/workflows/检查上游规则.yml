@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   check:
+    name: 检查规则来源与配置格式
     runs-on: ubuntu-latest
     steps:
       - name: 检出仓库
@@ -18,7 +19,6 @@ jobs:
       - name: 校验配置与规则格式
         run: |
           ruby -e 'require "yaml"; YAML.load_file("配置/Clash主配置.yaml"); Dir["规则集/Clash规则/*.yaml"].each { |file| YAML.load_file(file) }; puts "YAML 格式校验通过"'
-          python3 '脚本/同步兼容文件.py' --check
 
       - name: 检查远程规则网址
         shell: bash

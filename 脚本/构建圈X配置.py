@@ -224,6 +224,12 @@ def build(personal_path: Path, output_path: Path, private_path: Path | None = No
             personal_map["policy"], private_map["server_remote"]
         )
 
+    # 上游更新记录的装饰性英文标题统一显示为中文，保留作者署名。
+    upstream_prefix = re.sub(
+        r"(?m)^# 𝐂𝐮𝐭𝐭𝐥𝐞𝐟𝐢𝐬𝐡.*$",
+        "# 墨鱼自用配置更新记录（作者：ddgksf2013）",
+        upstream_prefix,
+    )
     output = [upstream_prefix]
     for name, body in upstream_sections:
         if name == "server_remote":

@@ -1,4 +1,4 @@
-# Amazon shopping only. AWS is intentionally not included here.
+# Amazon 电商购物域名，AWS 云服务由独立规则处理。
 HOST-SUFFIX,amazon.com,🛒Amazon电商
 HOST-SUFFIX,amazon.ca,🛒Amazon电商
 HOST-SUFFIX,amazon.co.uk,🛒Amazon电商

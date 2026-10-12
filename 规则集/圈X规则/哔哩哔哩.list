@@ -1,4 +1,4 @@
-# Bilibili main site, APIs and video CDN.
+# 哔哩哔哩主站、接口与视频分发域名。
 HOST-SUFFIX,bilibili.com,📺哔哩哔哩
 HOST-SUFFIX,bilibili.tv,📺哔哩哔哩
 HOST-SUFFIX,hdslb.com,📺哔哩哔哩

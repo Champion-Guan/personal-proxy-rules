@@ -1,4 +1,4 @@
-# Apple services should connect directly.
+# 苹果服务默认直连。
 HOST-SUFFIX,apple.com,direct
 HOST-SUFFIX,icloud.com,direct
 HOST-SUFFIX,apple-cloudkit.com,direct
