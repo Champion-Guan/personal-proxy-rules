@@ -1,6 +1,6 @@
 # Mihomo / Clash Party 主配置（第一版）
 # 这是给 SubStore 合并订阅节点后的主配置模板。
-# 项目仓库：https://github.com/MrGuAm/personal-proxy-rules
+# 项目仓库：https://github.com/Champion-Guan/personal-proxy-rules
 
 mode: rule
 log-level: info
@@ -272,7 +272,7 @@ rule-providers:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9.yaml"
+    url: "https://raw.githubusercontent.com/Champion-Guan/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9.yaml"
     path: ./规则缓存/哔哩哔哩.yaml
     interval: 86400
   apple_services:
@@ -288,21 +288,21 @@ rule-providers:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/AWS%E6%9C%8D%E5%8A%A1.yaml"
+    url: "https://raw.githubusercontent.com/Champion-Guan/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/AWS%E6%9C%8D%E5%8A%A1.yaml"
     path: ./规则缓存/AWS服务.yaml
     interval: 86400
   amazon_shop:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/Amazon%E7%94%B5%E5%95%86.yaml"
+    url: "https://raw.githubusercontent.com/Champion-Guan/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/Amazon%E7%94%B5%E5%95%86.yaml"
     path: ./规则缓存/Amazon电商.yaml
     interval: 86400
   wildberries:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/Wildberries%E7%94%B5%E5%95%86.yaml"
+    url: "https://raw.githubusercontent.com/Champion-Guan/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/Wildberries%E7%94%B5%E5%95%86.yaml"
     path: ./规则缓存/Wildberries电商.yaml
     interval: 86400
 

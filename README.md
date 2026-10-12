@@ -31,11 +31,11 @@
 
 Quantumult X 订阅地址：
 
-`https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E9%85%8D%E7%BD%AE/%E5%9C%88X%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE.conf`
+`https://raw.githubusercontent.com/Champion-Guan/personal-proxy-rules/main/%E9%85%8D%E7%BD%AE/%E5%9C%88X%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE.conf`
 
 Clash Party / SubStore 主配置地址：
 
-`https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E9%85%8D%E7%BD%AE/Clash%E4%B8%BB%E9%85%8D%E7%BD%AE.yaml`
+`https://raw.githubusercontent.com/Champion-Guan/personal-proxy-rules/main/%E9%85%8D%E7%BD%AE/Clash%E4%B8%BB%E9%85%8D%E7%BD%AE.yaml`
 
 官方配置每 6 小时检查一次。生成时会保留官方 DNS，但删除 `no-ipv6` 以允许 IPv6，并采用墨鱼官方的临时节点订阅。个人节点订阅地址不会写入本仓库。
 
@@ -94,7 +94,7 @@ python3 脚本/同步兼容文件.py
 
 ## 使用前需要修改
 
-主仓库地址：<https://github.com/MrGuAm/personal-proxy-rules>
+主仓库地址：<https://github.com/Champion-Guan/personal-proxy-rules>
 
 配置和自定义规则已经使用该仓库的 Raw 地址。
 
