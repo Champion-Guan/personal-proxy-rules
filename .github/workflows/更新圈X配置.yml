@@ -1,0 +1,29 @@
+name: 更新圈X配置
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v5
+
+      - name: 构建并校验圈X配置
+        run: |
+          python3 '脚本/构建圈X配置.py' '配置/圈X分流模板.conf' '配置/圈X自动配置.conf'
+          python3 '脚本/同步兼容文件.py'
+
+      - name: 提交生成配置
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add '配置/圈X自动配置.conf' quantum-x-auto.conf
+          git diff --cached --quiet || git commit -m "维护：更新圈X配置"
+          git push

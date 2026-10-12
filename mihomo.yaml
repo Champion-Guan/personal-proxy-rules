@@ -1,6 +1,6 @@
-# Mihomo / Clash Party v1
+# Mihomo / Clash Party 主配置（第一版）
 # 这是给 SubStore 合并订阅节点后的主配置模板。
-# GitHub: https://github.com/MrGuAm/personal-proxy-rules
+# 项目仓库：https://github.com/MrGuAm/personal-proxy-rules
 
 mode: rule
 log-level: info
@@ -196,84 +196,84 @@ rule-providers:
     behavior: classical
     format: yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml"
-    path: ./rule-providers/lan.yaml
+    path: ./规则缓存/局域网.yaml
     interval: 86400
   loya_reject:
     type: http
     behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt"
-    path: ./rule-providers/loyalsoldier-reject.yaml
+    path: ./规则缓存/基础广告拦截.yaml
     interval: 86400
   loya_private:
     type: http
     behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/private.txt"
-    path: ./rule-providers/loyalsoldier-private.yaml
+    path: ./规则缓存/私有地址.yaml
     interval: 86400
   privacy:
     type: http
     behavior: classical
     format: yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Privacy/Privacy.yaml"
-    path: ./rule-providers/privacy.yaml
+    path: ./规则缓存/隐私拦截.yaml
     interval: 86400
   telegram:
     type: http
     behavior: classical
     format: yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml"
-    path: ./rule-providers/telegram.yaml
+    path: ./规则缓存/电报.yaml
     interval: 86400
   twitter:
     type: http
     behavior: classical
     format: yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Twitter/Twitter.yaml"
-    path: ./rule-providers/twitter.yaml
+    path: ./规则缓存/X推特.yaml
     interval: 86400
   openai:
     type: http
     behavior: classical
     format: yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml"
-    path: ./rule-providers/openai.yaml
+    path: ./规则缓存/OpenAI平台.yaml
     interval: 86400
   claude:
     type: http
     behavior: classical
     format: yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml"
-    path: ./rule-providers/claude.yaml
+    path: ./规则缓存/Claude平台.yaml
     interval: 86400
   gemini:
     type: http
     behavior: classical
     format: yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml"
-    path: ./rule-providers/gemini.yaml
+    path: ./规则缓存/Gemini平台.yaml
     interval: 86400
   youtube:
     type: http
     behavior: classical
     format: yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml"
-    path: ./rule-providers/youtube.yaml
+    path: ./规则缓存/YouTube媒体.yaml
     interval: 86400
   spotify:
     type: http
     behavior: classical
     format: yaml
     url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.yaml"
-    path: ./rule-providers/spotify.yaml
+    path: ./规则缓存/Spotify音乐.yaml
     interval: 86400
   bilibili:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/rules/mihomo/bilibili.yaml"
-    path: ./rule-providers/bilibili.yaml
+    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9.yaml"
+    path: ./规则缓存/哔哩哔哩.yaml
     interval: 86400
   apple_services:
     type: inline
@@ -288,22 +288,22 @@ rule-providers:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/rules/mihomo/aws-services.yaml"
-    path: ./rule-providers/aws-services.yaml
+    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/AWS%E6%9C%8D%E5%8A%A1.yaml"
+    path: ./规则缓存/AWS服务.yaml
     interval: 86400
   amazon_shop:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/rules/mihomo/amazon-shopping.yaml"
-    path: ./rule-providers/amazon-shopping.yaml
+    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/Amazon%E7%94%B5%E5%95%86.yaml"
+    path: ./规则缓存/Amazon电商.yaml
     interval: 86400
   wildberries:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/rules/mihomo/wildberries.yaml"
-    path: ./rule-providers/wildberries.yaml
+    url: "https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/Wildberries%E7%94%B5%E5%95%86.yaml"
+    path: ./规则缓存/Wildberries电商.yaml
     interval: 86400
 
 rules:

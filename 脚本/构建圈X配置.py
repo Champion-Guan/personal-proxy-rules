@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a Quantumult X config from Cuttlefish upstream plus personal sections."""
+"""将墨鱼上游配置与个人分流策略合成为圈 X 配置。"""
 
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ POLICY_MAP = {
 def split_sections(text: str) -> tuple[str, list[tuple[str, str]]]:
     matches = list(re.finditer(r"(?m)^\[([^\]]+)\]\s*$", text))
     if not matches:
-        raise ValueError("configuration has no Quantumult X sections")
+        raise ValueError("配置中没有圈 X 配置分区")
     prefix = text[: matches[0].start()]
     sections = []
     for index, match in enumerate(matches):
@@ -49,7 +49,7 @@ def meaningful(section: str) -> bool:
 
 
 def body_lines(section: str) -> list[str]:
-    """Return active (non-comment) lines below a section header."""
+    """提取分区标题下实际生效的配置行，忽略注释和空行。"""
     return [
         line.strip()
         for line in section.splitlines()[1:]
@@ -62,7 +62,7 @@ def resource_url(line: str) -> str:
 
 
 def map_official_policy(line: str) -> str:
-    """Map an official filter resource to one of the personal policy groups."""
+    """将官方规则资源引用的策略映射到个人策略组。"""
     match = re.search(r"force-policy=([^,]+)", line)
     if not match:
         return line
@@ -79,11 +79,10 @@ def map_official_policy(line: str) -> str:
 
 
 def merge_filter_remote(official: str, personal: str) -> str:
-    """Merge resource lists, preferring personal entries with the same URL."""
+    """合并远程规则；网址相同时优先采用个人配置。"""
     personal_lines = body_lines(personal)
     personal_urls = {resource_url(line) for line in personal_lines}
-    # WeChat's image CDN must bypass advertising lists and broad proxy lists.
-    # Keep its direct list at the very front of the generated filter order.
+    # 微信图片直连规则放在最前，避免广告规则或宽泛代理规则误匹配。
     priority_direct = [
         line for line in personal_lines if resource_url(line) == WECHAT_RULE_URL
     ]
@@ -94,12 +93,11 @@ def merge_filter_remote(official: str, personal: str) -> str:
         map_official_policy(line)
         for line in body_lines(official)
         if resource_url(line) not in personal_urls
-        # Replace the upstream broad StreamingSE entry with the personal,
-        # Bilibili-only rule set so other streaming services are unaffected.
+        # 以个人哔哩哔哩规则替换上游宽泛媒体规则，避免影响其他媒体服务。
         and not resource_url(line).endswith("/StreamingSE.list")
     ]
 
-    # Put broad catch-all resources last so they cannot shadow personal service rules.
+    # 将宽泛与兜底规则放在最后，避免提前覆盖个人服务规则。
     broad_markers = ("/Streaming.list", "/Proxy.list", "/ASN.China.list")
     specific = [line for line in official_lines if not any(marker in line for marker in broad_markers)]
     broad = [line for line in official_lines if any(marker in line for marker in broad_markers)]
@@ -127,7 +125,7 @@ def local_rule_key(line: str) -> tuple[str, ...]:
 
 
 def merge_filter_local(official: str, personal: str) -> str:
-    """Merge local rules by match target, preferring personal policy choices."""
+    """按匹配目标合并本地规则，优先采用个人策略。"""
     personal_lines = body_lines(personal)
     personal_keys = {local_rule_key(line) for line in personal_lines}
     official_lines = [line for line in body_lines(official) if local_rule_key(line) not in personal_keys]
@@ -139,7 +137,7 @@ def merge_filter_local(official: str, personal: str) -> str:
 
 
 def enable_ipv6(dns_section: str) -> str:
-    """Follow the official DNS section but remove its IPv6 disabling directive."""
+    """沿用官方 DNS 配置，移除禁用 IPv6 的指令。"""
     lines = []
     for line in dns_section.splitlines():
         if line.strip().lower() == "no-ipv6":
@@ -169,7 +167,7 @@ def fetch_upstream() -> str:
 
 
 def fetch_private_server_tags(server_remote: str) -> list[str]:
-    """Fetch only node tags for the local static manual policy group."""
+    """提取订阅节点名称，供本地静态手动选择策略使用。"""
     source_url = next(
         (line.split(",", 1)[0].strip() for line in body_lines(server_remote)
          if line.startswith(("http://", "https://"))),
@@ -199,7 +197,7 @@ def fetch_private_server_tags(server_remote: str) -> list[str]:
 
 
 def expand_local_manual_policy(policy: str, server_remote: str) -> str:
-    """Make the local manual group static so unhealthy nodes remain selectable."""
+    """将本地手动选择组展开为静态节点列表，保留暂时不可用的节点。"""
     tags = fetch_private_server_tags(server_remote)
     if not tags:
         return policy
@@ -249,7 +247,9 @@ def build(personal_path: Path, output_path: Path, private_path: Path | None = No
         else:
             output.append(body)
 
-    output_path.write_text("\n".join(part.rstrip("\n") for part in output).rstrip() + "\n", encoding="utf-8")
+    # 清理上游注释中的行尾空白，保证生成文件通过 Git 格式检查。
+    merged = "\n".join(part.rstrip("\n") for part in output)
+    output_path.write_text("\n".join(line.rstrip() for line in merged.splitlines()).rstrip() + "\n", encoding="utf-8")
 
 
 def validate(path: Path, private_overlay: bool = False) -> None:
@@ -257,27 +257,27 @@ def validate(path: Path, private_overlay: bool = False) -> None:
     _, sections = split_sections(text)
     names = [name for name, _ in sections]
     if names.count("policy") != 1 or names.count("filter_remote") != 1 or names.count("filter_local") != 1:
-        raise ValueError("generated config must have exactly one policy/filter_remote/filter_local section")
+        raise ValueError("生成配置必须各包含一个 policy、filter_remote 和 filter_local 分区")
     if names.count("server_remote") != 1:
-        raise ValueError("generated config must have exactly one server_remote section")
+        raise ValueError("生成配置必须包含一个 server_remote 分区")
     if private_overlay:
         if "p12 =" not in text or "passphrase =" not in text:
-            raise ValueError("private MITM material was not included")
+            raise ValueError("未合入私密 MITM 证书配置")
     else:
         if "Ruk1ng001/freeSub" not in text:
-            raise ValueError("official server_remote subscription was not included")
+            raise ValueError("未合入官方临时节点订阅")
         if "gist.githubusercontent.com" in text:
-            raise ValueError("personal subscription URL must not be published")
+            raise ValueError("个人订阅网址不能写入公开配置")
         if "p12 =" in text or "passphrase =" in text:
-            raise ValueError("private MITM material must not be published")
+            raise ValueError("私密 MITM 证书配置不能公开发布")
     if re.search(r"(?m)^\s*no-ipv6\s*$", text):
-        raise ValueError("generated config must leave IPv6 enabled")
+        raise ValueError("生成配置必须保持 IPv6 启用")
     if "[rewrite_remote]" not in text or "BiliBiliAdsLite.conf" not in text:
-        raise ValueError("official rewrite_remote section was not included")
+        raise ValueError("未合入官方远程重写配置")
     if "quantumult-x.conf" not in text and "🤖 AI平台" not in text:
-        raise ValueError("personal policy overlay was not included")
+        raise ValueError("未合入个人策略配置")
     if re.search(r"(?i)^(?:vmess|vless|trojan|ss|ssr|hysteria2?)://", text, re.MULTILINE):
-        raise ValueError("node URLs must not be committed")
+        raise ValueError("节点连接网址不能提交到公开仓库")
 
     policies = set()
     for line in text.splitlines():
@@ -304,12 +304,12 @@ def validate(path: Path, private_overlay: bool = False) -> None:
             if target not in policies:
                 missing.add(target)
     if missing:
-        raise ValueError("rules reference missing policies: " + ", ".join(sorted(missing)))
+        raise ValueError("规则引用了不存在的策略组：" + "、".join(sorted(missing)))
 
 
 def main() -> None:
     if len(sys.argv) not in {3, 4}:
-        raise SystemExit("usage: build_quantumultx.py personal.conf output.conf [private-overlay.conf]")
+        raise SystemExit("用法：python3 脚本/构建圈X配置.py 配置/圈X分流模板.conf 配置/圈X自动配置.conf [圈X私密配置.conf]")
     output = Path(sys.argv[2])
     private_path = Path(sys.argv[3]) if len(sys.argv) == 4 else None
     build(Path(sys.argv[1]), output, private_path)

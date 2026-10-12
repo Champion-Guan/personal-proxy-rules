@@ -1,0 +1,9 @@
+# Bilibili main site, APIs and video CDN.
+HOST-SUFFIX,bilibili.com,📺哔哩哔哩
+HOST-SUFFIX,bilibili.tv,📺哔哩哔哩
+HOST-SUFFIX,hdslb.com,📺哔哩哔哩
+HOST-SUFFIX,bilivideo.com,📺哔哩哔哩
+HOST-SUFFIX,bilivideo.cn,📺哔哩哔哩
+HOST-SUFFIX,biliapi.com,📺哔哩哔哩
+HOST-SUFFIX,biliapi.net,📺哔哩哔哩
+HOST-SUFFIX,biligame.com,📺哔哩哔哩

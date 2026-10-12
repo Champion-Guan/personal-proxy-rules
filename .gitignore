@@ -1,2 +1,7 @@
-quantumult-x.private.conf
+圈X私密配置.conf
 quantum-x-local.conf
+quantumult-x.private.conf
+圈X本地配置.conf
+.DS_Store
+__pycache__/
+*.pyc
