@@ -274,7 +274,7 @@ def validate(path: Path, private_overlay: bool = False) -> None:
         raise ValueError("生成配置必须保持 IPv6 启用")
     if "[rewrite_remote]" not in text or "BiliBiliAdsLite.conf" not in text:
         raise ValueError("未合入官方远程重写配置")
-    if "quantumult-x.conf" not in text and "🤖 AI平台" not in text:
+    if "🤖 AI平台" not in text:
         raise ValueError("未合入个人策略配置")
     if re.search(r"(?i)^(?:vmess|vless|trojan|ss|ssr|hysteria2?)://", text, re.MULTILINE):
         raise ValueError("节点连接网址不能提交到公开仓库")

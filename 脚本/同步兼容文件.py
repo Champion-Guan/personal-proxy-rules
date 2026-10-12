@@ -7,9 +7,6 @@ import sys
 
 项目目录 = Path(__file__).resolve().parent.parent
 兼容映射 = {
-    "mihomo.yaml": "配置/Clash主配置.yaml",
-    "quantumult-x.conf": "配置/圈X分流模板.conf",
-    "quantum-x-auto.conf": "配置/圈X自动配置.conf",
     "rules/mihomo/aws-services.yaml": "规则集/Clash规则/AWS服务.yaml",
     "rules/mihomo/amazon-shopping.yaml": "规则集/Clash规则/Amazon电商.yaml",
     "rules/mihomo/wildberries.yaml": "规则集/Clash规则/Wildberries电商.yaml",

@@ -5,9 +5,6 @@
 ```text
 个人分流规则/
 ├── README.md                    # 完整中文使用说明，直接显示在 GitHub 首页
-├── mihomo.yaml                  # Clash Party 订阅入口
-├── quantumult-x.conf            # 圈 X 个人策略模板
-├── quantum-x-auto.conf          # 圈 X 自动生成配置
 ├── 圈X私密配置示例.conf
 ├── 配置/
 │   ├── Clash主配置.yaml
@@ -24,17 +21,21 @@
 └── rules/                       # 自动同步的旧规则网址兼容副本
 ```
 
-配置、规则和脚本以中文目录内的文件为准。修改配置或规则后执行 `python3 脚本/同步兼容文件.py`，更新旧网址兼容副本；不要直接编辑根目录的三个英文配置文件或 `rules/`。GitHub 首页需要 `README.md`，现有订阅需要原入口文件名，因此保留这些英文名称。客户端配置关键字、域名、上游网址、品牌名称与文件扩展名按原格式保留。
+配置、规则和脚本以中文目录内的文件为准。修改规则后执行 `python3 脚本/同步兼容文件.py`，更新旧规则网址兼容副本；不要直接编辑 `rules/`。GitHub 首页使用 `README.md`，客户端配置关键字、域名、上游网址、品牌名称与文件扩展名按原格式保留。
 
 中文规则网址已进行百分号编码，确保客户端可以正常请求。重命名没有改变策略组、规则顺序或分流行为。
 
 ## Quantumult X 自动配置
 
-`配置/圈X自动配置.conf` 由 GitHub Actions 自动生成，并同步到兼容入口 `quantum-x-auto.conf`：以墨鱼官方配置为上游，采用官方通用设置、任务和重写；采用个人策略组；合并官方与个人分流并自动去重。
+`配置/圈X自动配置.conf` 由 GitHub Actions 自动生成：以墨鱼官方配置为上游，采用官方通用设置、任务和重写；采用个人策略组；合并官方与个人分流并自动去重。
 
 Quantumult X 订阅地址：
 
-`https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/quantum-x-auto.conf`
+`https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E9%85%8D%E7%BD%AE/%E5%9C%88X%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE.conf`
+
+Clash Party / SubStore 主配置地址：
+
+`https://raw.githubusercontent.com/MrGuAm/personal-proxy-rules/main/%E9%85%8D%E7%BD%AE/Clash%E4%B8%BB%E9%85%8D%E7%BD%AE.yaml`
 
 官方配置每 6 小时检查一次。生成时会保留官方 DNS，但删除 `no-ipv6` 以允许 IPv6，并采用墨鱼官方的临时节点订阅。个人节点订阅地址不会写入本仓库。
 
@@ -99,8 +100,8 @@ python3 脚本/同步兼容文件.py
 
 ## 重要说明
 
-- `配置/Clash主配置.yaml` 中的节点由 SubStore 合并你的机场订阅后提供，旧入口为 `mihomo.yaml`。
-- `配置/圈X分流模板.conf` 中的节点标签由 SubStore/圈X订阅提供；本文件负责策略组和远程分流，旧入口为 `quantumult-x.conf`。
+- `配置/Clash主配置.yaml` 中的节点由 SubStore 合并你的机场订阅后提供。
+- `配置/圈X分流模板.conf` 中的节点标签由 SubStore/圈X订阅提供；本文件负责策略组和远程分流。
 - AWS亚马逊服务器节点是根据订阅节点名称筛选出来的节点组，名称中需要包含 `AWS`、`亚马逊` 或 `Amazon`。
 - AWS 控制台和云服务域名使用“☁️ AWS亚马逊服务器节点”，不会被 Amazon 电商规则覆盖。
 - Apple 服务（包括 `*.apple.com`、`*.icloud.com` 等）默认直连。

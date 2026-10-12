@@ -24,6 +24,6 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add '配置/圈X自动配置.conf' quantum-x-auto.conf
+          git add '配置/圈X自动配置.conf'
           git diff --cached --quiet || git commit -m "维护：更新圈X配置"
           git push
