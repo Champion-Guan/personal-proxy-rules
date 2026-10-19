@@ -57,6 +57,14 @@ proxy-groups:
     proxies:
       - DIRECT
       - "🚀 节点选择"
+      - "♻️ 自动选择"
+      - "🛠️ 手动选择"
+      - "☁️ AWS亚马逊服务器节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇹🇼 台湾节点"
 
   - name: "🛒Amazon电商"
     type: select
@@ -309,7 +317,6 @@ rule-providers:
 rules:
   # 个人指定域名优先于远程规则集。
   - DOMAIN,chanmpion.ccwu.cc,🚀 节点选择
-  - DOMAIN-SUFFIX,wbbasket.ru,DIRECT
   - DOMAIN-SUFFIX,jojocode.com,DIRECT
   - DOMAIN-SUFFIX,api-cn.hi-code.cc,DIRECT
   # ChatGPT/Codex 核心域名优先于广告和隐私规则。
