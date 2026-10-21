@@ -18,6 +18,8 @@ jobs:
 
       - name: 构建并校验圈X配置
         run: |
+          python3 '脚本/同步AI核心规则.py' --check
+          python3 '脚本/测试AI规则.py'
           python3 '脚本/构建圈X配置.py' '配置/圈X分流模板.conf' '配置/圈X自动配置.conf'
 
       - name: 提交生成配置

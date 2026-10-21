@@ -82,6 +82,8 @@ def merge_filter_remote(official: str, personal: str) -> str:
     """合并远程规则；网址相同时优先采用个人配置。"""
     personal_lines = body_lines(personal)
     personal_urls = {resource_url(line) for line in personal_lines}
+    priority_ai = [line for line in personal_lines if "force-policy=🤖 AI平台" in line]
+    personal_lines = [line for line in personal_lines if line not in priority_ai]
     # 微信图片直连规则放在最前，避免广告规则或宽泛代理规则误匹配。
     priority_direct = [
         line for line in personal_lines if resource_url(line) == WECHAT_RULE_URL
@@ -106,6 +108,9 @@ def merge_filter_remote(official: str, personal: str) -> str:
     if priority_direct:
         lines.extend(["", "# ======= 优先直连规则 ======= #"])
         lines.extend(priority_direct)
+    if priority_ai:
+        lines.extend(["", "# ======= AI平台优先规则（先于广告、隐私与宽泛分流） ======= #"])
+        lines.extend(priority_ai)
     lines.extend(["", "# ======= 墨鱼官方规则（策略已映射到个人策略组） ======= #"])
     lines.extend(specific)
     lines.extend(["", "# ======= 个人规则（同 URL 时优先） ======= #"])
@@ -128,8 +133,12 @@ def merge_filter_local(official: str, personal: str) -> str:
     """按匹配目标合并本地规则，优先采用个人策略。"""
     personal_lines = body_lines(personal)
     personal_keys = {local_rule_key(line) for line in personal_lines}
+    priority_ai = [line for line in personal_lines if line.endswith(",🤖 AI平台")]
+    personal_lines = [line for line in personal_lines if line not in priority_ai]
     official_lines = [line for line in body_lines(official) if local_rule_key(line) not in personal_keys]
-    lines = ["[filter_local]", "", "# ======= 墨鱼官方本地规则 ======= #"]
+    lines = ["[filter_local]", "", "# ======= AI平台本地兜底（不依赖远程资源下载） ======= #"]
+    lines.extend(priority_ai)
+    lines.extend(["", "# ======= 墨鱼官方本地规则 ======= #"])
     lines.extend(official_lines)
     lines.extend(["", "# ======= 个人本地规则（重复目标时优先） ======= #"])
     lines.extend(personal_lines)

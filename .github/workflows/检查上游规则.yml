@@ -18,6 +18,8 @@ jobs:
 
       - name: 校验配置与规则格式
         run: |
+          python3 '脚本/同步AI核心规则.py' --check
+          python3 '脚本/测试AI规则.py'
           ruby -e 'require "yaml"; YAML.load_file("配置/Clash主配置.yaml"); Dir["规则集/Clash规则/*.yaml"].each { |file| YAML.load_file(file) }; puts "YAML 格式校验通过"'
 
       - name: 检查远程规则网址

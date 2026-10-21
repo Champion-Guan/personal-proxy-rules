@@ -69,6 +69,16 @@ python3 脚本/构建圈X配置.py 配置/圈X分流模板.conf 配置/圈X自�
 
 ## 当前分类
 
+### AI平台规则维护与手机更新
+
+OpenAI / ChatGPT / Codex、Gemini、Claude / Claude Code 共用“🤖 AI平台”。核心规则统一维护在 `规则集/圈X规则/AI平台核心.list`，2026-10-21 按 MetaCubeX 的 OpenAI、Google Gemini、Anthropic 专项列表核对，并补充登录、验证、语音和静态资源依赖。该列表是本仓库维护的快照，不会因为请求间隔缩短就自动获得上游新增域名。
+
+修改核心列表后，先运行 `python3 脚本/同步AI核心规则.py`，再运行 `python3 脚本/构建圈X配置.py 配置/圈X分流模板.conf 配置/圈X自动配置.conf`。同步脚本将同一份核心规则嵌入 Clash 主配置和圈 X 模板，远程规则下载失败时仍有本地兜底；GitHub Actions 会检查一致性和规则优先级。原有 blackmatrix7 远程补充列表保留，圈 X 的 AI 资源每 6 小时检查一次。
+
+AI 核心规则优先于广告、隐私与国内分流。不把整个 `google.com`、`googleapis.com`、`cloudflare.com` 或 AWS 云服务强制归入 AI；但 Google 登录、Google 用户图片、验证等共享域名也会随“AI平台”选择出口。
+
+手机圈 X 需要更新**完整配置**，然后更新分流资源并重连 VPN；只更新节点订阅不会更新本地规则。使用 iCloud 的 `圈X本地配置.conf` 时需同步更新该文件，不能只刷新 GitHub 上的公开配置。请在“AI平台”中选择服务支持地区且实际可用的节点；测速成功不代表能通过服务的地区或 IP 风控。若仍无法使用，检查圈 X 请求记录中的域名、命中策略和具体错误，不要仅凭无法打开就认定是规则问题。
+
 - ✈️X电报：Telegram、X
 - 🤖 AI平台：OpenAI、ChatGPT、Codex、Claude、Gemini
 - ▶️YouTube

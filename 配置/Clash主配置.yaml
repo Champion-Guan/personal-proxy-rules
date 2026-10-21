@@ -187,18 +187,85 @@ proxy-groups:
     lazy: true
 
 rule-providers:
-  openai_core:
+  ai_core:
     type: inline
     behavior: classical
     format: yaml
     payload:
-      - DOMAIN-SUFFIX,chatgpt.com
       - DOMAIN-SUFFIX,openai.com
-      - DOMAIN-SUFFIX,oaiusercontent.com
+      - DOMAIN-SUFFIX,chatgpt.com
       - DOMAIN-SUFFIX,oaistatic.com
-      - DOMAIN-SUFFIX,auth.openai.com
-      - DOMAIN-SUFFIX,challenges.cloudflare.com
-      - DOMAIN-SUFFIX,ws.chatgpt.com
+      - DOMAIN-SUFFIX,oaiusercontent.com
+      - DOMAIN-SUFFIX,oaistatsig.com
+      - DOMAIN-SUFFIX,openai.org
+      - DOMAIN-SUFFIX,chat.com
+      - DOMAIN-SUFFIX,chatgpt.site
+      - DOMAIN-SUFFIX,sora.com
+      - DOMAIN-SUFFIX,openai.com.cdn.cloudflare.net
+      - DOMAIN-SUFFIX,chatgpt.livekit.cloud
+      - DOMAIN-SUFFIX,host.livekit.cloud
+      - DOMAIN-SUFFIX,turn.livekit.cloud
+      - DOMAIN,openaiapi-site.azureedge.net
+      - DOMAIN,openaiassets.blob.core.windows.net
+      - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
+      - DOMAIN,openaicom.imgix.net
+      - DOMAIN,openaicomproductionae4b.blob.core.windows.net
+      - DOMAIN,production-openaicom-storage.azureedge.net
+      - DOMAIN,cdn.openaimerge.com
+      - DOMAIN,ai.google.dev
+      - DOMAIN-SUFFIX,gemini.google.com
+      - DOMAIN-SUFFIX,gemini.google
+      - DOMAIN-SUFFIX,bard.google.com
+      - DOMAIN-SUFFIX,aistudio.google.com
+      - DOMAIN-SUFFIX,makersuite.google.com
+      - DOMAIN-SUFFIX,generativeai.google
+      - DOMAIN-SUFFIX,gemini.gstatic.com
+      - DOMAIN,alkalicore-pa.clients6.google.com
+      - DOMAIN,alkalimakersuite-pa.clients6.google.com
+      - DOMAIN,webchannel-alkalimakersuite-pa.clients6.google.com
+      - DOMAIN,geminiweb-pa.clients.google.com
+      - DOMAIN,geminiweb-pa.clients6.google.com
+      - DOMAIN-SUFFIX,generativelanguage.googleapis.com
+      - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+      - DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com
+      - DOMAIN-SUFFIX,geller-pa.googleapis.com
+      - DOMAIN,cloudaicompanion.googleapis.com
+      - DOMAIN,cloudcode-pa.googleapis.com
+      - DOMAIN,daily-cloudcode-pa.googleapis.com
+      - DOMAIN,accounts.google.com
+      - DOMAIN,accounts.youtube.com
+      - DOMAIN,oauth2.googleapis.com
+      - DOMAIN,securetoken.googleapis.com
+      - DOMAIN,identitytoolkit.googleapis.com
+      - DOMAIN-SUFFIX,apis.google.com
+      - DOMAIN-SUFFIX,googleusercontent.com
+      - DOMAIN,ssl.gstatic.com
+      - DOMAIN,www.gstatic.com
+      - DOMAIN-SUFFIX,anthropic.com
+      - DOMAIN-SUFFIX,anthropic.team
+      - DOMAIN-SUFFIX,claude.ai
+      - DOMAIN-SUFFIX,claude.com
+      - DOMAIN-SUFFIX,claude.app
+      - DOMAIN-SUFFIX,claude.dev
+      - DOMAIN-SUFFIX,claude.new
+      - DOMAIN-SUFFIX,claude.site
+      - DOMAIN-SUFFIX,claudeusercontent.com
+      - DOMAIN-SUFFIX,claudemcpclient.com
+      - DOMAIN-SUFFIX,claudemcpcontent.com
+      - DOMAIN-SUFFIX,claudepages.dev
+      - DOMAIN-SUFFIX,claudestudio.com
+      - DOMAIN-SUFFIX,clau.de
+      - DOMAIN-SUFFIX,ant.dev
+      - DOMAIN-SUFFIX,antspace.dev
+      - DOMAIN,servd-anthropic-website.b-cdn.net
+      - DOMAIN,challenges.cloudflare.com
+      - DOMAIN,openai-api.arkoselabs.com
+      - DOMAIN,client-api.arkoselabs.com
+      - DOMAIN,api.statsig.com
+      - DOMAIN,events.statsigapi.net
+      - DOMAIN-SUFFIX,featuregates.org
+      - DOMAIN,browser-intake-datadoghq.com
+      - DOMAIN,rum.browser-intake-datadoghq.com
   lan:
     type: http
     behavior: classical
@@ -319,8 +386,8 @@ rules:
   - DOMAIN,chanmpion.ccwu.cc,🚀 节点选择
   - DOMAIN-SUFFIX,jojocode.com,DIRECT
   - DOMAIN-SUFFIX,api-cn.hi-code.cc,DIRECT
-  # ChatGPT/Codex 核心域名优先于广告和隐私规则。
-  - RULE-SET,openai_core,🤖 AI平台
+  # OpenAI/ChatGPT/Codex、Gemini、Claude Code 核心及登录依赖优先于广告和隐私规则。
+  - RULE-SET,ai_core,🤖 AI平台
   # 本地和广告规则应放在其他服务规则之前。
   - RULE-SET,lan,DIRECT
   - RULE-SET,loya_private,DIRECT
