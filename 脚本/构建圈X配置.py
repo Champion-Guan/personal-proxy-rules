@@ -12,6 +12,7 @@ from pathlib import Path
 
 UPSTREAM_URL = "https://ddgksf2013.top/Profile/QuantumultX.conf"
 WECHAT_RULE_URL = "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/WeChat/WeChat.list"
+SPOTIFY_SOURCE_URL = "https://raw.githubusercontent.com/Amlabort/MY_clash/main/files/QX/spot-NoAd.conf"
 SECTION_RE = re.compile(r"^\[([^\]]+)\]\s*$")
 SECTION_NAMES = {"general", "task_local", "rewrite_local", "rewrite_remote", "server_local", "server_remote", "dns", "policy", "filter_remote", "filter_local", "http_backend", "mitm"}
 PERSONAL_OVERRIDE_SECTIONS = {"policy"}
@@ -175,6 +176,38 @@ def fetch_upstream() -> str:
     return result.stdout.decode("utf-8")
 
 
+def sync_spotify_rewrite() -> None:
+    """仅提取圈 X 重写及 hostname，分流在模板中独立配置。"""
+    result = subprocess.run(
+        ["curl", "--fail", "--location", "--silent", "--show-error",
+         "--retry", "3", "--connect-timeout", "20", "--max-time", "120",
+         SPOTIFY_SOURCE_URL], check=True, capture_output=True,
+    )
+    lines = result.stdout.decode("utf-8").splitlines()
+    rewrites = [line.strip() for line in lines
+                if line.startswith("^") and " url " in line]
+    hosts = [line.strip() for line in lines if line.startswith("hostname")]
+    if not rewrites or not hosts:
+        raise ValueError("Spotify 上游缺少重写或 hostname，停止更新")
+    target = Path(__file__).resolve().parent.parent / "规则集/圈X规则/Spotify去广告.conf"
+    target.write_text(
+        "# 来源：" + SPOTIFY_SOURCE_URL + "\n"
+        "# 由构建脚本自动提取圈 X 重写；分流由主配置管理。\n"
+        + "\n".join(hosts + rewrites) + "\n", encoding="utf-8",
+    )
+
+
+def merge_rewrite_remote(official: str, personal: str) -> str:
+    personal_lines = body_lines(personal)
+    urls = {resource_url(line) for line in personal_lines}
+    official_lines = [
+        line for line in body_lines(official)
+        if resource_url(line) not in urls
+        and "/app2smile/rules/master/module/spotify.conf" not in line
+    ]
+    return "[rewrite_remote]\n\n" + "\n".join(personal_lines + official_lines) + "\n"
+
+
 def fetch_private_server_tags(server_remote: str) -> list[str]:
     """提取订阅节点名称，供本地静态手动选择策略使用。"""
     source_url = next(
@@ -246,6 +279,9 @@ def build(personal_path: Path, output_path: Path, private_path: Path | None = No
             continue
         if name == "dns":
             output.append(enable_ipv6(body))
+            continue
+        if name == "rewrite_remote" and name in personal_map:
+            output.append(merge_rewrite_remote(body, personal_map[name]))
             continue
         if name == "filter_remote":
             output.append(merge_filter_remote(body, personal_map[name]))
@@ -327,6 +363,7 @@ def main() -> None:
         raise SystemExit("用法：python3 脚本/构建圈X配置.py 配置/圈X分流模板.conf 配置/圈X自动配置.conf [圈X私密配置.conf]")
     output = Path(sys.argv[2])
     private_path = Path(sys.argv[3]) if len(sys.argv) == 4 else None
+    sync_spotify_rewrite()
     build(Path(sys.argv[1]), output, private_path)
     validate(output, private_path is not None)
 

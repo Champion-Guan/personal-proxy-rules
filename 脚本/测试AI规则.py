@@ -12,6 +12,18 @@ BUILD = runpy.run_path(str(ROOT / "脚本/构建圈X配置.py"))
 
 
 class AIRulesTests(unittest.TestCase):
+    def test_spotify_rewrite_replaces_official(self):
+        official = (
+            "[rewrite_remote]\n"
+            "https://raw.githubusercontent.com/app2smile/rules/master/module/spotify.conf, enabled=true\n"
+            "https://example.test/other.conf, enabled=true\n"
+        )
+        personal = "[rewrite_remote]\nhttps://example.test/Spotify去广告.conf, enabled=true\n"
+        merged = BUILD["merge_rewrite_remote"](official, personal)
+        self.assertNotIn("app2smile/rules/master/module/spotify.conf", merged)
+        self.assertIn("Spotify去广告.conf", merged)
+        self.assertIn("other.conf", merged)
+
     def test_generated_sources(self):
         for path, expected in SYNC["expected_files"]():
             self.assertEqual(path.read_text(encoding="utf-8"), expected)

@@ -17,9 +17,16 @@ fi
 
 mkdir -p "$(dirname "$output")"
 
+staged_output="$(mktemp "$(dirname "$output")/.quantumultx-build.XXXXXX")"
+trap 'rm -f "$staged_output"' EXIT
+
 python3 "$repo_dir/脚本/构建圈X配置.py" \
   "$repo_dir/配置/圈X分流模板.conf" \
-  "$output" \
+  "$staged_output" \
   "$private_overlay"
+
+chmod 600 "$staged_output"
+chflags nohidden "$staged_output"
+mv -f "$staged_output" "$output"
 
 echo "已生成本地配置：$output"
