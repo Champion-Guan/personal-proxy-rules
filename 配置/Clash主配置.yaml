@@ -24,6 +24,7 @@ proxy-groups:
       - "🇺🇸 美国节点"
       - "☁️ AWS亚马逊服务器节点"
       - "🇹🇼 台湾节点"
+      - "luo买的节点"
       - DIRECT
 
   - name: "♻️ 自动选择"
@@ -185,6 +186,11 @@ proxy-groups:
     interval: 300
     tolerance: 50
     lazy: true
+
+  - name: "luo买的节点"
+    type: select
+    include-all: true
+    filter: "(?i)luo\\s*买的"
 
 rule-providers:
   ai_core:

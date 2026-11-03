@@ -69,6 +69,8 @@ python3 脚本/构建圈X配置.py 配置/圈X分流模板.conf 配置/圈X自�
 
 ## 当前分类
 
+“luo买的节点”按节点名中的 `luo买的` 筛选（兼容英文字母大小写及中间空白），组内可手动切换节点；在“节点选择”中选择该分组即可使用。
+
 ### AI平台规则维护与手机更新
 
 OpenAI / ChatGPT / Codex、Gemini、Claude / Claude Code 共用“🤖 AI平台”。核心规则统一维护在 `规则集/圈X规则/AI平台核心.list`，2026-10-21 按 MetaCubeX 的 OpenAI、Google Gemini、Anthropic 专项列表核对，并补充登录、验证、语音和静态资源依赖。该列表是本仓库维护的快照，不会因为请求间隔缩短就自动获得上游新增域名。
