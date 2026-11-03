@@ -73,6 +73,21 @@ proxy-groups:
       - DIRECT
       - "🚀 节点选择"
 
+  - name: "Takealot电商"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - DIRECT
+      - "♻️ 自动选择"
+      - "🛠️ 手动选择"
+      - "☁️ AWS亚马逊服务器节点"
+      - "luo买的节点"
+      - "🇺🇸 美国节点"
+      - "🇯🇵 日本节点"
+      - "🇸🇬 新加坡节点"
+      - "🇭🇰 香港节点"
+      - "🇹🇼 台湾节点"
+
   - name: "✈️X电报"
     type: select
     proxies:
@@ -379,6 +394,13 @@ rule-providers:
     url: "https://raw.githubusercontent.com/Champion-Guan/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/Amazon%E7%94%B5%E5%95%86.yaml"
     path: ./规则缓存/Amazon电商.yaml
     interval: 86400
+  takealot:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/Champion-Guan/personal-proxy-rules/main/%E8%A7%84%E5%88%99%E9%9B%86/Clash%E8%A7%84%E5%88%99/Takealot%E7%94%B5%E5%95%86.yaml"
+    path: ./规则缓存/Takealot电商.yaml
+    interval: 86400
   wildberries:
     type: http
     behavior: classical
@@ -394,6 +416,7 @@ rules:
   - DOMAIN-SUFFIX,api-cn.hi-code.cc,DIRECT
   # OpenAI/ChatGPT/Codex、Gemini、Claude Code 核心及登录依赖优先于广告和隐私规则。
   - RULE-SET,ai_core,🤖 AI平台
+  - RULE-SET,takealot,Takealot电商
   # 本地和广告规则应放在其他服务规则之前。
   - RULE-SET,lan,DIRECT
   - RULE-SET,loya_private,DIRECT
