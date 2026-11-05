@@ -414,6 +414,7 @@ rules:
   - DOMAIN,chanmpion.ccwu.cc,🚀 节点选择
   - DOMAIN-SUFFIX,jojocode.com,DIRECT
   - DOMAIN-SUFFIX,api-cn.hi-code.cc,DIRECT
+  - DOMAIN,www.hi-code.cc,🚀 节点选择
   # OpenAI/ChatGPT/Codex、Gemini、Claude Code 核心及登录依赖优先于广告和隐私规则。
   - RULE-SET,ai_core,🤖 AI平台
   - RULE-SET,takealot,Takealot电商
