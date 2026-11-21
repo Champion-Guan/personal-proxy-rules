@@ -12,7 +12,7 @@ from pathlib import Path
 
 UPSTREAM_URL = "https://ddgksf2013.top/Profile/QuantumultX.conf"
 WECHAT_RULE_URL = "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/WeChat/WeChat.list"
-SPOTIFY_SOURCE_URL = "https://raw.githubusercontent.com/Amlabort/MY_clash/main/files/QX/spot-NoAd.conf"
+SPOTIFY_SOURCE_URL = "https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/QX/spot-new.conf"
 SECTION_RE = re.compile(r"^\[([^\]]+)\]\s*$")
 SECTION_NAMES = {"general", "task_local", "rewrite_local", "rewrite_remote", "server_local", "server_remote", "dns", "policy", "filter_remote", "filter_local", "http_backend", "mitm"}
 PERSONAL_OVERRIDE_SECTIONS = {"policy"}
